@@ -1,0 +1,15 @@
+{
+  "name": "cardone",
+  "version": "1.0.0",
+  "description": "cardone API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Fernando Aguilar Madriz",
+  "license": "ISC",
+  "dependencies": {
+    "carbone": "^2.1.1",
+    "express": "^4.17.1"
+  }
+}
