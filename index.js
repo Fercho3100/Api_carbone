@@ -23,13 +23,10 @@ app.post('/',function(request, response){
         
         carbone.render(path_file, request.body, options, function(err, result){
           if (err) return console.log(err);
-          
-          
 
           response.contentType("application/pdf");
           response.send(result);
         });
-
   }catch(e){
     console.log(e)
   }
