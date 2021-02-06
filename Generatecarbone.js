@@ -1,12 +1,17 @@
 const fs = require('fs');
 const carbone = require('carbone');
 function Export_Pdf(company,data){
+  console.log(data);
   try{
+    console.log(company)
+    var path_file = '';
     if(company == "ebay"){
             path_file = './companies/ebay/ebay.ods'
 
         }else if (company == "amazon"){
             path_file = './companies/ebay/ebay.ods'
+        }else if (company == "etiqueta"){
+            path_file = './companies/etiqueta/etiqueta.ods'
         }
 
         var options = {

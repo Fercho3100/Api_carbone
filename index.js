@@ -15,6 +15,8 @@ app.post('/',function(request, response){
 
         }else if (company == "amazon"){
             path_file = './companies/amazon/amazon.ods'
+        }else if (company == "etiqueta"){
+            path_file = './companies/etiqueta/etiqueta2.ods'
         }
 
         var options = {
