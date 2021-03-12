@@ -1,110 +1,41 @@
 const fs = require('fs');
-const carbone = require('carbone');
-const carbone = require('carbone');
-// Data to inject
-var  data ={
-    "date": 1492012745,
-    "ship_to": {
-      "name": "myCompany",
-      "address": "here",
-      "city": "Notfar",
-      "country": ""
-    },
-    "bill_to": {
-      "name": "myCompany",
-      "address": "here",
-      "city": "Notfar",
-      "country": ""
-    },
-    "ship_from": {
-      "name": "myCompany",
-      "address": "here",
-      "city": "Notfar",
-      "country": ""
-    },
-    "items": [
-      {
-        "qty": "product 1",
-        "item_code": 0.1,
-        "desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.\n Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-        "price": 1,
-        "pricetotal": 1
-      },
-      {
-        "qty": "product 1",
-        "item_code": 0.1,
-        "desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.\n Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-        "price": 1,
-        "pricetotal": 1
-      },
-      {
-        "qty": "product 1",
-        "item_code": 0.1,
-        "desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.\n Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-        "price": 1,
-        "pricetotal": 1
-      },
-      {
-        "qty": "product 1",
-        "item_code": 0.1,
-        "desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.\n Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-        "price": 1,
-        "pricetotal": 1
-      },
-      {
-        "qty": "product 1",
-        "item_code": 0.1,
-        "desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.\n Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-        "price": 1,
-        "pricetotal": 1
-      },
-      {
-        "qty": "product 1",
-        "item_code": 0.1,
-        "desc": 10,
-        "price": 1,
-        "pricetotal": 1
-      },
-      {
-        "qty": "product 1",
-        "item_code": 0.1,
-        "desc": "",
-        "price": 1,
-        "pricetotal": 1
+
+function Path_invoice(nombre){
+  RUTA_FOLDER = './companies'
+  PATH_RESPONSE = RUTA_FOLDER;
+
+  var data = fs.readdir(RUTA_FOLDER, function (err, archivos) {
+      if (err) {
+        onError(err);
+        return;
       }
-    ],
-    "total_uni": 100,
-    "total": 14
-  };
+      for(id in archivos){
+        if(archivos[id] == nombre){
+          console.log("existe");
+          PATH_RESPONSE = PATH_RESPONSE+'/'+nombre+'.ods'
+          var options = {
+            convertTo : 'pdf' //can be docx, txt, ...
+          };
+        
+          carbone.render(path_file, request.body, options, function(err, result){
+          if (err) return console.log(err);
 
-
-  var options = {
-    convertTo : 'pdf' //can be docx, txt, ...
-  };
-
-  carbone.render('./archivos/ebay/ebay.ods', data, options, function(err, result){
-    if (err) return console.log(err);
-    fs.writeFileSync('./result.pdf', result);
-    //process.exit(); // to kill automatically LibreOffice workers
-    process.exit();
+          response.contentType("application/pdf");
+          response.send(result);
+        });
+        }else{
+          console.log(archivos[id])
+        }
+      }
+    return PATH_RESPONSE;
+  
   });
+ console.log(data);
+}
 
 
 
-  const express = require('express')
-const fs = require('fs');
-const ca = require("./Generatecarbone");
-const app = express()
-const port = 3005
 
-app.get('/', (req, res) => {
-  console.log(req.body);      // your JSON
-  res.send(req.body);    // echo the result back
-  //var data =fs.readFileSync('./result.pdf');
-  //res.contentType("application/pdf");
-  //res.send(data);
-})
+var data =Path_invoice('ebay');
+console.log(data);
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
