@@ -22,7 +22,7 @@ app.post('/',function(request, response){
         }
         for(id in archivos){
           if(archivos[id] == company){
-            console.log("existe");
+            //console.log("existe");
             PATH_RESPONSE = PATH_RESPONSE+'/'+company+'/'+company+'.ods'
             var options = {
               convertTo : 'pdf' //can be docx, txt, ...
@@ -35,7 +35,7 @@ app.post('/',function(request, response){
             response.send(result);
           });
           }else{
-            console.log(archivos[id])
+            //console.log(archivos[id])
           }
         }
       return PATH_RESPONSE;
